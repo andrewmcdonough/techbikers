@@ -1,13 +1,14 @@
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from markupfield.fields import MarkupField
 
 from sales.models import Sale
 
 class Ride(models.Model):
     name           = models.CharField(max_length = '255')
     slug           = models.CharField(max_length = '255', unique = True)
-    description    = models.TextField(blank = True)
+    description    = MarkupField(null=True, blank=True, markup_type='markdown')
     start_location = models.CharField(max_length = '255')
     end_location   = models.CharField(max_length = '255')
     start_date     = models.DateField()
@@ -17,7 +18,7 @@ class Ride(models.Model):
     rider_capacity = models.IntegerField(default = 0)
     price          = models.DecimalField(default = 0.00, max_digits = 6, decimal_places = 2)
     currency       = models.CharField(max_length = 3, choices=(('gbp', 'GBP'), ('usd', 'USD'), ('eur', 'EUR')), default = 'gbp')
-    terms_and_conditions = models.TextField(null=True, blank = True, default='')
+    terms_and_conditions = MarkupField(null=True, blank=True, markup_type='markdown')
 
     # Linked Entities
     chapter        = models.ForeignKey('chapters.Chapter', null=True, blank=True)

@@ -119,7 +119,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'suit', # Admin interface
     'django.contrib.admin',
-    'django.contrib.markup',
     'django.contrib.flatpages',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',

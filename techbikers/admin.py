@@ -4,6 +4,7 @@ from django.core import urlresolvers
 from django.contrib.flatpages.admin import FlatpageForm, FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 from codemirror import CodeMirrorTextarea
+from markupfield.fields import MarkupField
 
 from riders.models import RiderProfile
 from rides.models import Ride, RideRiders
@@ -24,9 +25,9 @@ class RideAdmin(admin.ModelAdmin):
     list_filter = ('start_date',)
     readonly_fields = ('get_riders',)
     fields = (('name', 'slug'), ('start_location', 'end_location'), ('start_date', 'end_date'), 'rider_capacity', ('price', 'currency'), 'chapter', 'description', 'terms_and_conditions', 'get_riders')
-    formfield_overrides = {
-        models.TextField: {'widget': CodeMirrorTextarea(mode='markdown', config={'lineWrapping': True, 'lineNumbers': False})},
-    }
+    #formfield_overrides = {
+    #    models.TextField: {'widget': CodeMirrorTextarea(mode='markdown', config={'lineWrapping': True, 'lineNumbers': False})},
+    #}
 
     def get_riders(self, obj):
         def build_list_item(rider):
